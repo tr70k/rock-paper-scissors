@@ -2,6 +2,6 @@
 
 This was done just for fun.
 
-![img.png](screenshot.png)
+<img src="screenshot.png" width="350" title="Screenshot">
 
 Available here: https://rock-paper-scissors.tr70k.eu/
