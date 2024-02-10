@@ -7,6 +7,7 @@ function App() {
   const [isRunning, setIsRunning] = useState(false)
   const [guess, setGuess] = useState<ItemType | null>(null)
   const [speed, setSpeed] = useState<Speed>(1)
+  const [count, setCount] = useState<number>(20)
 
   return (
     <div className="App">
@@ -23,6 +24,17 @@ function App() {
           }
         </div>
         <div className="Header">
+          Count:
+          <select
+            name="count"
+            value={count}
+            onChange={(e) => setCount(+e.target.value)}
+            disabled={isRunning}
+          >
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+          </select>
           Speed:
           <select
             name="speed"
@@ -40,7 +52,7 @@ function App() {
           </button>
         </div>
       </div>
-      {isRunning && <Game guess={guess} speed={speed} />}
+      {isRunning && <Game guess={guess} speed={speed} count={count} />}
     </div>
   );
 }

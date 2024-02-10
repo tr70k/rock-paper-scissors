@@ -4,7 +4,6 @@ import {
   ICONS,
   ITEM_SIZE,
   ITEM_TYPES,
-  ITEMS_COUNT,
   TICK_DELAY,
   generateItems,
   getWinnerType,
@@ -14,12 +13,12 @@ import {
   Speed,
 } from './utils';
 
-const useGame = (step = 2) => {
+const useGame = (count = 20, step = 2) => {
   const [items, setItems] = useState(() => {
     const randomItems = [
-      ...generateItems(ITEM_TYPES.ROCK, ITEMS_COUNT),
-      ...generateItems(ITEM_TYPES.PAPER, ITEMS_COUNT),
-      ...generateItems(ITEM_TYPES.SCISSORS, ITEMS_COUNT),
+      ...generateItems(ITEM_TYPES.ROCK, count),
+      ...generateItems(ITEM_TYPES.PAPER, count),
+      ...generateItems(ITEM_TYPES.SCISSORS, count),
     ]
     return shuffle(randomItems)
   })
@@ -71,12 +70,13 @@ const useGame = (step = 2) => {
 type Props = {
   guess?: ItemType | null
   speed?: Speed
+  count?: number
 }
 
-export const Game = ({ guess, speed = 0.5 }: Props) => {
+export const Game = ({ guess, speed = 0.5, count = 20 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
-  const { items } = useGame(3 - speed)
+  const { items } = useGame(count, 3 - speed)
 
   useEffect(() => {
     function handleResize() {
@@ -94,9 +94,9 @@ export const Game = ({ guess, speed = 0.5 }: Props) => {
   const paperCount = items.filter(({ type }) => type === ITEM_TYPES.PAPER).length
   const scissorsCount = items.length - rockCount - paperCount
 
-  const isRockWinner = rockCount === ITEMS_COUNT * 3
-  const isPaperWinner = paperCount === ITEMS_COUNT * 3
-  const isScissorsWinner = scissorsCount === ITEMS_COUNT * 3
+  const isRockWinner = rockCount === count * 3
+  const isPaperWinner = paperCount === count * 3
+  const isScissorsWinner = scissorsCount === count * 3
 
   return (
     <div>
