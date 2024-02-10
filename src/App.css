@@ -1,11 +1,11 @@
 .App {
   padding: 20px;
   position: relative;
-  min-width: 622px;
 }
 
 .Header {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
 }
 
@@ -19,7 +19,11 @@
 
 .Wrapper {
   border: 1px solid black;
-  width: min-content;
+  display: flex;
+  align-items: start;
+  aspect-ratio: 1;
+  width: 630px;
+  max-width: 100%;
 }
 
 .Field {
@@ -35,7 +39,8 @@
 }
 
 .Copyright {
-  width: 600px;
+  width: 630px;
+  max-width: 100%;
   margin-top: 10px;
   font-size: 10px;
   text-align: center;

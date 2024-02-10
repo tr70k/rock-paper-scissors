@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   FIELD_SIZE,
   ICONS,
@@ -72,7 +72,20 @@ type Props = {
 }
 
 export const Game = ({ guess }: Props) => {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const [scale, setScale] = useState(1)
   const { items } = useGame()
+
+  useEffect(() => {
+    function handleResize() {
+      if (wrapperRef.current) {
+        setScale((wrapperRef.current.getBoundingClientRect().width - ITEM_SIZE * 2) / FIELD_SIZE)
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const rockCount = items.filter(({ type }) => type === ITEM_TYPES.ROCK).length
   const paperCount = items.filter(({ type }) => type === ITEM_TYPES.PAPER).length
@@ -99,6 +112,7 @@ export const Game = ({ guess }: Props) => {
         }
       </div>
       <div
+        ref={wrapperRef}
         className="Wrapper"
         style={{
           padding: ITEM_SIZE,
@@ -109,6 +123,7 @@ export const Game = ({ guess }: Props) => {
           style={{
             height: FIELD_SIZE,
             width: FIELD_SIZE,
+            transform: `scale(${scale})`,
           }}
         >
           {
