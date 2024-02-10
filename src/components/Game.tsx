@@ -121,6 +121,7 @@ export const Game = ({ guess }: Props) => {
                   left: item.position.x - ITEM_SIZE / 2,
                   height: ITEM_SIZE,
                   width: ITEM_SIZE,
+                  fontSize: ITEM_SIZE * 1.5,
                 }}
               >
                 {ICONS[item.type]}

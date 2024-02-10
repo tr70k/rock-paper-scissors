@@ -1,7 +1,7 @@
 export const TICK_DELAY = 50
 export const ITEMS_COUNT = 10
 
-export const ITEM_SIZE = 10
+export const ITEM_SIZE = 15
 export const FIELD_SIZE = 600
 
 export const MIN_POSITION = 0
