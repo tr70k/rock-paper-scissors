@@ -11,9 +11,10 @@ import {
   randomMove,
   shuffle,
   ItemType,
+  Speed,
 } from './utils';
 
-const useGame = () => {
+const useGame = (step = 2) => {
   const [items, setItems] = useState(() => {
     const randomItems = [
       ...generateItems(ITEM_TYPES.ROCK, ITEMS_COUNT),
@@ -30,7 +31,7 @@ const useGame = () => {
       for (let i = 0; i < updatedItems.length; i++) {
         updatedItems[i] = {
           ...updatedItems[i],
-          position: randomMove(updatedItems[i].position)
+          position: randomMove(updatedItems[i].position, step)
         }
 
         for (let j = i + 1; j < updatedItems.length; j++) {
@@ -56,7 +57,7 @@ const useGame = () => {
     })
 
     setTimeout(tick, TICK_DELAY)
-  }, [])
+  }, [step])
 
   useEffect(() => {
     setTimeout(tick, TICK_DELAY)
@@ -69,12 +70,13 @@ const useGame = () => {
 
 type Props = {
   guess?: ItemType | null
+  speed?: Speed
 }
 
-export const Game = ({ guess }: Props) => {
+export const Game = ({ guess, speed = 0.5 }: Props) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const [scale, setScale] = useState(1)
-  const { items } = useGame()
+  const { items } = useGame(3 - speed)
 
   useEffect(() => {
     function handleResize() {

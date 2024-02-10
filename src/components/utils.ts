@@ -16,6 +16,8 @@ export const ITEM_TYPES = {
 export type ItemTypeKey = keyof typeof ITEM_TYPES
 export type ItemType = typeof ITEM_TYPES[ItemTypeKey]
 
+export type Speed = 0.5 | 1 | 1.5 | 2
+
 export const ICONS: Record<ItemType, string> = {
   [ITEM_TYPES.ROCK]: '🪨',
   [ITEM_TYPES.PAPER]: '✂️',
@@ -63,10 +65,10 @@ export const generateItems = (itemType: ItemType, count: number): Item[] => {
   }))
 }
 
-export const randomMove = (position: Position): Position => {
+export const randomMove = (position: Position, step = 2): Position => {
   return {
-    x: Math.min(Math.max(position.x + getRandomInt(-ITEM_SIZE, ITEM_SIZE), MIN_POSITION), MAX_POSITION),
-    y: Math.min(Math.max(position.y + getRandomInt(-ITEM_SIZE, ITEM_SIZE), MIN_POSITION), MAX_POSITION),
+    x: Math.min(Math.max(position.x + getRandomInt(-ITEM_SIZE / step, ITEM_SIZE / step), MIN_POSITION), MAX_POSITION),
+    y: Math.min(Math.max(position.y + getRandomInt(-ITEM_SIZE / step, ITEM_SIZE / step), MIN_POSITION), MAX_POSITION),
   }
 }
 
