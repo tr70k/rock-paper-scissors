@@ -83,6 +83,7 @@ export const Game = ({ guess }: Props) => {
       }
     }
 
+    handleResize()
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
@@ -121,8 +122,6 @@ export const Game = ({ guess }: Props) => {
         <div
           className="Field"
           style={{
-            height: FIELD_SIZE,
-            width: FIELD_SIZE,
             transform: `scale(${scale})`,
           }}
         >
