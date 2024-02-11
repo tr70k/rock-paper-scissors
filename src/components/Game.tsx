@@ -27,12 +27,16 @@ const useGame = (count = 20, step = 2) => {
     setItems((items) => {
       let updatedItems = [...items]
 
+      // move each item
       for (let i = 0; i < updatedItems.length; i++) {
         updatedItems[i] = {
           ...updatedItems[i],
           position: randomMove(updatedItems[i].position, step)
         }
+      }
 
+      // compare and update item types
+      for (let i = 0; i < updatedItems.length; i++) {
         for (let j = i + 1; j < updatedItems.length; j++) {
           if (
             (Math.abs(updatedItems[i].position.x - updatedItems[j].position.x) < ITEM_SIZE) &&
@@ -108,7 +112,7 @@ export const Game = ({ guess, speed = 0.5, count = 20 }: Props) => {
       <div className="Result">
         {
           isRockWinner || isPaperWinner || isScissorsWinner ? (
-            <b>{items[0].type === guess ? 'You win! =)' : 'You lose! =('}</b>
+            items[0].type === guess ? 'You win! =)' : 'You lose! =('
           ) : (
             'Waiting for result...'
           )

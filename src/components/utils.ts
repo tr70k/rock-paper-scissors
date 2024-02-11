@@ -1,4 +1,4 @@
-export const TICK_DELAY = 50
+export const TICK_DELAY = 100
 
 export const ITEM_SIZE = 15
 export const FIELD_SIZE = 600
